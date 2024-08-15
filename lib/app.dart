@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:howjam/checkpoint-img/accordion.dart';
 import 'package:howjam/settings.dart';
 
 import 'store/nav_state_store.dart';
-
-// packages to use
-// https://pub.dev/packages/chaleno
-// https://github.com/payam-zahedi/toastification
-// https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html
 
 // Location search: https://www.onemap.gov.sg/omapp/locationsearch?searchVal=malaysia
 void main() {
@@ -60,9 +56,7 @@ class App extends StatelessWidget {
       body: const SingleChildScrollView(
         child: Column(
           children: [
-            Placeholder(fallbackHeight: 400),
-            Placeholder(fallbackHeight: 400),
-            Placeholder(fallbackHeight: 400),
+            CheckpointAccordion(),
           ],
         ),
       ),

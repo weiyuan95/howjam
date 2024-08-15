@@ -38,6 +38,8 @@ dependencies:
   toastification: ^2.1.0
   mobx: ^2.3.3+2
   flutter_mobx: ^2.2.1+1
+  chaleno: ^0.0.8
+  transparent_image: ^2.0.1
 
 dev_dependencies:
   flutter_test:
