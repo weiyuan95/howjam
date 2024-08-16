@@ -1,0 +1,1 @@
+enum Country { singapore, malaysia }

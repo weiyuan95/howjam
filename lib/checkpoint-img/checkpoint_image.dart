@@ -12,7 +12,7 @@ class CheckpointImage extends StatelessWidget {
         Center(
           child: FadeInImage.assetNetwork(
             fadeInCurve: Curves.ease,
-            placeholder: 'assets/images/foo.png',
+            placeholder: 'assets/images/loading.png',
             image: url,
           ),
         ),

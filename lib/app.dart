@@ -1,24 +1,39 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:howjam/checkpoint-img/accordion.dart';
+import 'package:provider/provider.dart';
 import 'package:howjam/settings.dart';
 
 import 'store/nav_state_store.dart';
+import 'store/settings_store.dart';
+
+// packages to use
+// https://pub.dev/packages/chaleno
+// https://github.com/payam-zahedi/toastification
+// https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html
 
 // Location search: https://www.onemap.gov.sg/omapp/locationsearch?searchVal=malaysia
 void main() {
-  runApp(const MaterialApp(
-    home: App(),
-  ));
+  // runApp(const MaterialApp(
+  //   home: App(),
+  // ));
+  runApp(
+    MultiProvider(providers: [
+      Provider<SettingsStore>(create: (_) => SettingsStore()),
+    ], child: const MaterialApp(home: App())),
+  );
 }
 
 final navStateStore = NavStateStore();
+// final settingsStore = SettingsStore();
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final settingsStore = Provider.of<SettingsStore>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("HowJam?"),
