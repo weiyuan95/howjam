@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:howjam/checkpoint-img/accordion.dart';
-import 'package:provider/provider.dart';
 import 'package:howjam/settings.dart';
+import 'package:provider/provider.dart';
 
 import 'store/nav_state_store.dart';
 import 'store/settings_store.dart';
@@ -20,12 +20,10 @@ void main() {
   runApp(
     MultiProvider(providers: [
       Provider<SettingsStore>(create: (_) => SettingsStore()),
+      Provider<NavStateStore>(create: (_) => NavStateStore()),
     ], child: const MaterialApp(home: App())),
   );
 }
-
-final navStateStore = NavStateStore();
-// final settingsStore = SettingsStore();
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -33,6 +31,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final settingsStore = Provider.of<SettingsStore>(context);
+    final navStateStore = Provider.of<NavStateStore>(context);
 
     return Scaffold(
       appBar: AppBar(

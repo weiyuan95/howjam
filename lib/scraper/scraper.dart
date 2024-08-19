@@ -1,14 +1,15 @@
 import 'package:chaleno/chaleno.dart';
 
-enum CheckpointLocation { woodlands, tuas }
+enum CheckpointLocation { woodlands, tuas, secondlink }
 
 class Scraper {
   Future<List<String>> scrape(CheckpointLocation location) async {
     // Both locations have the same URL, but the image position is different
-    const trafficImageUrl =
+    const singaporeTrafficImageUrl =
         'https://onemotoring.lta.gov.sg/content/onemotoring/home/driving/traffic_information/traffic-cameras/woodlands.html';
 
-    var parser = await Chaleno().load(trafficImageUrl);
+    // Scrape Singapore traffic images
+    var parser = await Chaleno().load(singaporeTrafficImageUrl);
     var imageUrls = parser
             ?.querySelector('.road-snapshots')
             .querySelectorAll('img')
