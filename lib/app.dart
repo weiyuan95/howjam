@@ -7,8 +7,7 @@ import 'package:provider/provider.dart';
 import 'store/nav_state_store.dart';
 import 'store/settings_store.dart';
 
-// packages to use
-// https://pub.dev/packages/chaleno
+// packages to use?
 // https://github.com/payam-zahedi/toastification
 // https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html
 
@@ -30,7 +29,6 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final settingsStore = Provider.of<SettingsStore>(context);
     final navStateStore = Provider.of<NavStateStore>(context);
 
     return Scaffold(
@@ -67,12 +65,10 @@ class App extends StatelessWidget {
           onTap: navStateStore.onCountryTapped,
         ),
       ),
-      body: const SingleChildScrollView(
-        child: Column(
-          children: [
-            CheckpointAccordion(),
-          ],
-        ),
+      body: const Column(
+        children: [
+          Expanded(child: CheckpointAccordion()),
+        ],
       ),
     );
   }
