@@ -51,6 +51,7 @@ class SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     final settingsStore = Provider.of<SettingsStore>(context);
+    settingsStore.toggleDarkMode();
 
     return Scaffold(
       appBar: AppBar(
@@ -156,6 +157,7 @@ class SettingsState extends State<Settings> {
           content: Text('Settings saved!'),
         ),
       );
+
       Navigator.pop(context);
     }
   }

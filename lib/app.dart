@@ -12,13 +12,16 @@ import 'store/settings_store.dart';
 // https://datamall.lta.gov.sg/content/datamall/en/dynamic-data.html
 
 // Location search: https://www.onemap.gov.sg/omapp/locationsearch?searchVal=malaysia
-void main() {
-  // runApp(const MaterialApp(
-  //   home: App(),
-  // ));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MultiProvider(providers: [
-      Provider<SettingsStore>(create: (_) => SettingsStore()),
+      Provider<SettingsStore>(create: (_) {
+        var store = SettingsStore();
+        store.initSettings();
+        return store;
+      }),
       Provider<NavStateStore>(create: (_) => NavStateStore()),
     ], child: const MaterialApp(home: App())),
   );

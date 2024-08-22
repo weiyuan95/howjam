@@ -40,6 +40,7 @@ dependencies:
   provider: ^6.1.2
   chaleno: ^0.0.8
   transparent_image: ^2.0.1
+  shared_preferences: ^2.3.2
 
 dev_dependencies:
   flutter_test:
