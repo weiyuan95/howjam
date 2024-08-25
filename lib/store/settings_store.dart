@@ -43,8 +43,6 @@ abstract class _SettingsStore with Store {
     toCheckpoint = setting.toCheckpoint;
     vehicleType = setting.vehicleType;
     isDarkMode = setting.isDarkMode;
-
-    toggleDarkMode();
   }
 
   @action
