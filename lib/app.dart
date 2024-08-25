@@ -13,18 +13,22 @@ import 'store/settings_store.dart';
 
 // Location search: https://www.onemap.gov.sg/omapp/locationsearch?searchVal=malaysia
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  runApp(
-    MultiProvider(providers: [
-      Provider<SettingsStore>(create: (_) {
-        var store = SettingsStore();
-        store.initSettings();
-        return store;
-      }),
+  runApp(MultiProvider(
+    providers: [
+      Provider<SettingsStore>(create: (_) => SettingsStore()),
       Provider<NavStateStore>(create: (_) => NavStateStore()),
-    ], child: const MaterialApp(home: App())),
-  );
+    ],
+    builder: (context, _) {
+      // Initialise the stores here, so that the values are available on render
+      final navStateStore = Provider.of<NavStateStore>(context);
+      final settingsStore = Provider.of<SettingsStore>(context);
+
+      settingsStore.initSettings();
+      navStateStore.initSettings();
+
+      return const MaterialApp(home: App());
+    },
+  ));
 }
 
 class App extends StatelessWidget {
@@ -45,7 +49,6 @@ class App extends StatelessWidget {
             },
           ),
         ],
-        backgroundColor: Colors.grey,
       ),
       bottomNavigationBar: Observer(
         builder: (_) => BottomNavigationBar(

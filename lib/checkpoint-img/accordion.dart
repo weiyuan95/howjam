@@ -4,6 +4,7 @@ import 'package:howjam/checkpoint-img/checkpoint_image.dart';
 import 'package:howjam/scraper/scraper.dart';
 import 'package:howjam/scraper/scraper_cache.dart';
 import 'package:howjam/store/nav_state_store.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class CheckpointAccordion extends StatefulWidget {
@@ -78,6 +79,8 @@ class _CheckpointAccordionState extends State<CheckpointAccordion> {
     if (snapshot.hasData) {
       final woodlandsCachedItem = snapshot.data?[CheckpointLocation.woodlands];
       final tuasCachedItem = snapshot.data?[CheckpointLocation.tuas];
+      final String formattedDate =
+          DateFormat('kk:mm dd/MM/yyyy').format(DateTime.now());
 
       // TODO: consider error image?
       if (woodlandsCachedItem == null || tuasCachedItem == null) {
@@ -87,7 +90,7 @@ class _CheckpointAccordionState extends State<CheckpointAccordion> {
       return RefreshIndicator(
         key: _refreshIndicatorKey,
         color: Colors.white,
-        backgroundColor: Colors.blue,
+        backgroundColor: Colors.grey,
         strokeWidth: 4.0,
         onRefresh: () async {
           await Future<void>.delayed(const Duration(seconds: 2));
@@ -102,51 +105,71 @@ class _CheckpointAccordionState extends State<CheckpointAccordion> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       ExpansionTile(
+                        // Remove the border of the Expansion Tile
+                        shape: const Border(),
                         initiallyExpanded: true,
                         title: const Text("Woodlands Checkpoint"),
                         children: [
                           const Text("Johor–Singapore Causeway"),
+                          Text(formattedDate),
                           CheckpointImage(
+                            location: CheckpointLocation.woodlands,
                             url: woodlandsCachedItem.imageUrls[0],
                           ),
                           const Text("Woodlands Checkpoint"),
+                          Text(formattedDate),
                           CheckpointImage(
+                            location: CheckpointLocation.woodlands,
                             url: woodlandsCachedItem.imageUrls[1],
                           ),
                         ],
                       ),
                       ExpansionTile(
+                        // Remove the border of the Expansion Tile
+                        shape: const Border(),
                         initiallyExpanded: true,
                         title: const Text("Tuas Checkpoint"),
                         children: [
                           const Text("Second Link"),
+                          Text(formattedDate),
                           CheckpointImage(
+                            location: CheckpointLocation.tuas,
                             url: tuasCachedItem.imageUrls[0],
                           ),
                           const Text("Tuas Checkpoint"),
+                          Text(formattedDate),
                           CheckpointImage(
+                            location: CheckpointLocation.tuas,
                             url: tuasCachedItem.imageUrls[1],
                           ),
                         ],
                       ),
                     ]),
-                secondChild: const Column(children: [
+                secondChild: Column(children: [
                   ExpansionTile(
+                    // Remove the border of the Expansion Tile
+                    shape: const Border(),
                     initiallyExpanded: true,
-                    title: Text("Second Link Checkpoint Area"),
+                    title: const Text("Second Link Checkpoint Area"),
                     children: [
-                      Text("SECOND LINK MALAYSIA 0.5KM"),
-                      CheckpointImage(
+                      const Text("Second Link Malaysia 0.5KM"),
+                      Text(formattedDate),
+                      const CheckpointImage(
+                        location: CheckpointLocation.secondlink,
                         url:
                             "https://odis.sgp1.digitaloceanspaces.com/node/second_link_0.5",
                       ),
-                      Text("SECOND LINK MALAYSIA 1.3KM"),
-                      CheckpointImage(
+                      const Text("Second Link Malaysia 1.3KM"),
+                      Text(formattedDate),
+                      const CheckpointImage(
+                        location: CheckpointLocation.secondlink,
                         url:
                             "https://odis.sgp1.digitaloceanspaces.com/node/second_link_1.3",
                       ),
-                      Text("SECOND LINK MALAYSIA 4.7KM"),
-                      CheckpointImage(
+                      const Text("Second Link Malaysia 4.7KM"),
+                      Text(formattedDate),
+                      const CheckpointImage(
+                        location: CheckpointLocation.secondlink,
                         url:
                             "https://odis.sgp1.digitaloceanspaces.com/node/second_link_4.7",
                       ),
