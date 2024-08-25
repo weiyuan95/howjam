@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:howjam/enums/checkpoint.dart';
 import 'package:howjam/enums/country.dart';
@@ -55,7 +54,6 @@ class SettingsState extends State<Settings> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Settings"),
-        backgroundColor: Colors.grey,
       ),
       body: Form(
         autovalidateMode: AutovalidateMode.onUserInteraction,
@@ -65,37 +63,38 @@ class SettingsState extends State<Settings> {
           child: Observer(builder: (context) {
             return Column(
               children: <Widget>[
-                TextFormField(
-                  decoration: const InputDecoration(
-                    labelText: 'From Postal Code',
-                  ),
-                  initialValue: settingsStore.fromPostalCode.toString(),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-                  validator: (newValue) {
-                    if (newValue == null || newValue.isEmpty) {
-                      return 'Please enter a postal code';
-                    }
-                    if (newValue.length < 6) {
-                      return 'Postal code must be at least 6 digits';
-                    }
-                    if (newValue.length > 6) {
-                      return 'Postal code cannot be more than 6';
-                    }
-                    return null;
-                  },
-                  onChanged: (String? newValue) {
-                    // Save the postal code to settingsStore
-                    settingsStore.setFromPostalCode(newValue ?? '999999');
-                  },
-                  onSaved: (String? newValue) {
-                    settingsStore.setFromPostalCode(newValue ?? '999999');
-                  },
-                ),
-                const SizedBox(height: 16),
+                // TODO: Commented out code could be for future features
+                // TextFormField(
+                //   decoration: const InputDecoration(
+                //     labelText: 'From Postal Code',
+                //   ),
+                //   initialValue: settingsStore.fromPostalCode.toString(),
+                //   keyboardType: TextInputType.number,
+                //   inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                //   validator: (newValue) {
+                //     if (newValue == null || newValue.isEmpty) {
+                //       return 'Please enter a postal code';
+                //     }
+                //     if (newValue.length < 6) {
+                //       return 'Postal code must be at least 6 digits';
+                //     }
+                //     if (newValue.length > 6) {
+                //       return 'Postal code cannot be more than 6';
+                //     }
+                //     return null;
+                //   },
+                //   onChanged: (String? newValue) {
+                //     // Save the postal code to settingsStore
+                //     settingsStore.setFromPostalCode(newValue ?? '999999');
+                //   },
+                //   onSaved: (String? newValue) {
+                //     settingsStore.setFromPostalCode(newValue ?? '999999');
+                //   },
+                // ),
+                // const SizedBox(height: 16),
                 DropdownButtonFormField<Country>(
                   decoration: const InputDecoration(
-                    labelText: 'To Country',
+                    labelText: 'Default Destination Country',
                   ),
                   value: settingsStore.toCountry,
                   items: toCountryDropdownValues,
@@ -106,35 +105,36 @@ class SettingsState extends State<Settings> {
                     settingsStore.setToCountry(newValue!);
                   },
                 ),
+                // const SizedBox(height: 16),
+                // DropdownButtonFormField<Checkpoint>(
+                //   decoration: const InputDecoration(
+                //     labelText: 'To Checkpoint',
+                //   ),
+                //   value: settingsStore.toCheckpoint,
+                //   items: toCheckpointDropdownValues,
+                //   onChanged: (Checkpoint? newValue) {
+                //     settingsStore.setToCheckpoint(newValue!);
+                //   },
+                //   onSaved: (Checkpoint? newValue) {
+                //     settingsStore.setToCheckpoint(newValue!);
+                //   },
+                // ),
+                // const SizedBox(height: 16),
+                // DropdownButtonFormField<VehicleType>(
+                //   decoration: const InputDecoration(
+                //     labelText: 'Vehicle Type',
+                //   ),
+                //   value: settingsStore.vehicleType,
+                //   items: vehicleTypeDropdownValues,
+                //   onChanged: (VehicleType? newValue) {
+                //     settingsStore.setVehicleType(newValue!);
+                //   },
+                //   onSaved: (VehicleType? newValue) {
+                //     settingsStore.setVehicleType(newValue!);
+                //   },
+                // ),
+                // const Spacer(),
                 const SizedBox(height: 16),
-                DropdownButtonFormField<Checkpoint>(
-                  decoration: const InputDecoration(
-                    labelText: 'To Checkpoint',
-                  ),
-                  value: settingsStore.toCheckpoint,
-                  items: toCheckpointDropdownValues,
-                  onChanged: (Checkpoint? newValue) {
-                    settingsStore.setToCheckpoint(newValue!);
-                  },
-                  onSaved: (Checkpoint? newValue) {
-                    settingsStore.setToCheckpoint(newValue!);
-                  },
-                ),
-                const SizedBox(height: 16),
-                DropdownButtonFormField<VehicleType>(
-                  decoration: const InputDecoration(
-                    labelText: 'Vehicle Type',
-                  ),
-                  value: settingsStore.vehicleType,
-                  items: vehicleTypeDropdownValues,
-                  onChanged: (VehicleType? newValue) {
-                    settingsStore.setVehicleType(newValue!);
-                  },
-                  onSaved: (VehicleType? newValue) {
-                    settingsStore.setVehicleType(newValue!);
-                  },
-                ),
-                const Spacer(),
                 ElevatedButton(
                   onPressed: _saveSettings,
                   child: const Text('Save'),
@@ -156,6 +156,7 @@ class SettingsState extends State<Settings> {
           content: Text('Settings saved!'),
         ),
       );
+
       Navigator.pop(context);
     }
   }
